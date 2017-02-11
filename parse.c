@@ -18,9 +18,9 @@ int main(const int argc, const char* const argv[]) {
   char buffer[BUFSIZ];
   int size;
   int state = END_OF_LINE;
-  int wins = 0;
-  int draws = 0;
-  int losses = 0;
+  int white = 0;
+  int draw = 0;
+  int black = 0;
   for(int i = 1; i < argc; ++i) {
     file = fopen(argv[i], "r");
     if (!file) {
@@ -129,7 +129,7 @@ int main(const int argc, const char* const argv[]) {
           if (*cp == '0') {
             // There are 4 instances where it was 0-0, but the original doesn't care so I
             // won't either
-            ++losses;
+            ++black;
           } else if (*cp == '1') {
             state = PARSED_ONE;
           } else if (*cp == '\n') {
@@ -141,9 +141,9 @@ int main(const int argc, const char* const argv[]) {
 
         case PARSED_ONE:
           if (*cp == '-') {
-            ++wins;
+            ++white;
           } else if (*cp == '/') {
-            ++draws;
+            ++draw;
           } else if (*cp == '\n') {
             state = END_OF_LINE;
           } else {
@@ -158,6 +158,6 @@ int main(const int argc, const char* const argv[]) {
     }
     fclose(file);
   }
-  printf("%d-%d-%d=%d", wins, draws, losses, wins + draws + losses);
+  printf("%d %d %d %d", white + black + draw, white, black, draw);
   return 0;
 }
