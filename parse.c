@@ -130,6 +130,7 @@ int main(const int argc, const char* const argv[]) {
             // There are 4 instances where it was 0-0, but the original doesn't care so I
             // won't either
             ++black;
+            state = SEARCHING;
           } else if (*cp == '1') {
             state = PARSED_ONE;
           } else if (*cp == '\n') {
@@ -142,8 +143,10 @@ int main(const int argc, const char* const argv[]) {
         case PARSED_ONE:
           if (*cp == '-') {
             ++white;
+            state = SEARCHING;
           } else if (*cp == '/') {
             ++draw;
+            state = SEARCHING;
           } else if (*cp == '\n') {
             state = END_OF_LINE;
           } else {
