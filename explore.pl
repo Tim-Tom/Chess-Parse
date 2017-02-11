@@ -10,7 +10,7 @@ my %extra;
 while(<ARGV>) {
   # Make sure our parsing format doesn't miss any lines.
   die "$ARGV [line $.]: $_" if /^\s*\[Result/i && !/^\[Result\s+"[^"]+"\]\s*$/;
-  next unless /^\[Result "([^"]+)"\]\s*$/;
+  next unless /^\[Result\s+"([^"]+)/;
   ++$results{$1};
   push(@{ $extra{$ARGV} }, $.);
 }

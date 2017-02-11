@@ -6,7 +6,7 @@ use v5.24;
 my %results;
 # Simple Search
 while(<ARGV>) {
-  next unless /^\[Result "([^"]+)/;
+  next unless /^\[Result\s+"([^"]+)/;
   ++$results{$1};
 }
 
