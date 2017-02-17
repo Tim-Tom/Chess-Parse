@@ -4,8 +4,10 @@ use warnings;
 use v5.24;
 
 my %results;
-# Simple Search
-my @files = sort { -s $b <=> -s $a } @ARGV;
+
+chomp(my @files = <ARGV>);
+close *ARGV;
+
 
 my $NUM_PROCESSES = 4;
 
